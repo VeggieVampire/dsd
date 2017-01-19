@@ -1,6 +1,8 @@
 #!/bin/sh
 set -ex
 
+cwd=$(pwd)
+
 # Install mbelib
 wget https://github.com/szechyjs/mbelib/archive/master.tar.gz -O mbelib.tar.gz
 tar -xzf mbelib.tar.gz
@@ -24,3 +26,11 @@ if [ ! -d "$HOME/itpp/lib" ]; then
 else
   echo 'Using cached itpp.';
 fi
+
+# Install DSD
+  cd $cwd
+  mkdir build
+  cd build
+  cmake -DCMAKE_INSTALL_PREFIX=$HOME/mbelib -DCMAKE_INSTALL_PREFIX=$HOME/itpp ..
+  make
+  make install
